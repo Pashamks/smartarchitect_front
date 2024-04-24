@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Metal&display=swap');
+
+
+.MainText{
+    text-align: center;
+    margin-top: 10vh;
+    color:  white;
+    font-size: 3.9rem;
+    font-family: 'Metal';
+    text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.SimpleText{
+    text-align: center;
+    margin-top: 3vh;
+    color:  white;
+    font-size: 1.9rem;
+    font-family: 'Metal';
+    text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}

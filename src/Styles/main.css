@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Metal&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Itim&family=Metal&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Itim&family=Luckiest+Guy&family=Metal&display=swap');
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    padding: 0 2rem;
+  }
+  
+  nav a {
+    margin: 0 3rem;
+    color: var(--textColor);
+    text-decoration: none;
+    font-family: 'Metal';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 46px;
+    color: white;
+  }
+  

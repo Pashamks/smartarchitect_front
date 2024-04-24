@@ -1,0 +1,9 @@
+.App {
+  background-image: url("C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarchitect\\src\\Images\\back.gif");
+  background-size: cover;
+  background-position: center; 
+  height: 100vh;
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+}
