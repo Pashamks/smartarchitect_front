@@ -7,7 +7,9 @@ import {
 import "../Styles/main.css"
 import Home from "./Home/Home";
 import Detector from "./Detector/Detector";
-
+import Constructor from "./Constructor/Constructor";
+import Gallery from "./Gallery/Gallery";
+import Login from "./Login/Login";
 
   function Navbar(){
     const navRef = useRef();
@@ -16,7 +18,6 @@ import Detector from "./Detector/Detector";
         navRef.current.classList.toggle("responsive_nav");
     }
     return(
-        <BrowserRouter> 
         <header>
             <nav ref={navRef}>
                 <a href="/home">
@@ -25,10 +26,10 @@ import Detector from "./Detector/Detector";
                 <a href="/detect">
                     STYLE DETECTION
                 </a>
-                <a href="/colors">
+                <a href="/constructor">
                     FACADE CONSTRUCTOR
                 </a>
-                <a href="/move">
+                <a href="/gallery">
                     GALLERY
                 </a>
             </nav>  
@@ -37,10 +38,11 @@ import Detector from "./Detector/Detector";
                     <Route path="" element={<Home></Home>}></Route>
                     <Route path="/home" element={<Home></Home>}></Route>
                     <Route path="/detect" element={<Detector></Detector>}></Route>
+                    <Route path="/constructor" element={<Constructor></Constructor>}></Route>
+                    <Route path="/gallery" element={<Login></Login>}></Route>
                 </Routes>
             </div>
         </header>
-        </BrowserRouter>
     );
 }
 export default Navbar;

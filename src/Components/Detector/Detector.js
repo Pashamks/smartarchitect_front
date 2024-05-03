@@ -3,14 +3,15 @@ import UploadIcon from "C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarc
 import { useDropzone } from 'react-dropzone';
 import React, { useState, useCallback } from 'react';
 
-
 function Detector(){
     const [isFileUploaded, setIsFileUploaded] = useState(false);
     const [isDetectStarted, setIsDetectStarted] = useState(false);
+    const [isImageSaved, setIsImageSaved] = useState(false);
+
 
     const onDrop = useCallback((acceptedFiles) => {
        setIsFileUploaded(true);
-
+        
         const imageUrl = URL.createObjectURL(acceptedFiles[0]);
         document.getElementById("uploadedImageId").src = imageUrl;
         document.querySelector(".UploadedImageArea").style.display = 'block';
@@ -27,12 +28,35 @@ function Detector(){
     function tryAgainClick(){
         setIsDetectStarted(false);
         setIsFileUploaded(false);
+        setIsImageSaved(false);
+        document.getElementById('popupId').style.display = 'none';
     }
 
     function saveToGallery(){
-        setTimeout(function() {
-            document.getElementById('mydiv').style.display = 'block';
-        }, 10000);
+        var txt = "Image successfully saved to gallery!";
+        var speed = 100;
+        var i = 0;
+
+        function typeWriter() {
+            if (i < txt.length) {
+                document.getElementById("textId").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+            }
+
+        if(isImageSaved){
+            txt = "You can not save one image twice!"
+            document.getElementById("textId").innerHTML = "";
+            typeWriter();
+            return;
+        }
+        document.getElementById('popupId').style.display = 'block';
+        setIsImageSaved(true);
+
+        document.getElementById("textId").innerHTML = "";
+        typeWriter();
+       
     }
 
     return(
@@ -77,7 +101,12 @@ function Detector(){
                         <button className="SaveGalleryButton" onClick={saveToGallery}>Save to gallery</button>
                         <button className="TryAgainButton" onClick={tryAgainClick}>Try another picture</button>
                     </div>
-                </div>       
+                </div> 
+                <div className="Popup" id="popupId" style={{display : 'block'}}>
+                    <div className="PopupText">
+                        <p id="textId"></p>
+                    </div>
+                </div>      
         </div>
     );
 }

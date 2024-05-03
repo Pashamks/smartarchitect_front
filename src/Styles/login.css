@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Itim&family=Metal&display=swap');
+
+.LoginArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-family: 'Abhaya Libre';
+    height: 60vh;
+}
+.WelcomeText{
+    color: white;
+    font-size: 3rem;
+    margin-top: 3%;
+}
+.EmailBox{
+    display: flex;
+    border: 2px solid #000;
+    border-radius: 20px;
+    width: 20%;
+    height: 10%;
+    font-size: 1.6rem;
+    background-color: white;
+}
+.UserImage{
+    width: 9%;
+    height: 80%;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 2%;
+}
+.EmailInput{
+    background-color: transparent;
+    font-family: 'Abhaya Libre';
+    border-color: transparent;
+    font-size: 1.6rem;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+.PasswordBox{
+    display: flex;
+    border: 2px solid #000;
+    border-radius: 20px;
+    margin-top: 2%;
+    width: 20%;
+    height: 10%;
+    font-size: 1.6rem;
+    background-color: white;
+}
+.PasswordInput{
+    background-color: transparent;
+    font-family: 'Abhaya Libre';
+    border-color: transparent;
+    font-size: 1.6rem;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+.Form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.LoginButton{
+
+}

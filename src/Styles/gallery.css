@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Itim&family=Metal&display=swap');
+
+.SearchArea{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.SearchBox{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255);
+    width: 30%;
+    height: 50%;
+    border-radius: 5px;
+}
+
+.InputText{
+    width: 90%;
+    background-color: transparent;
+    border: 2px solid #FFF;
+    border-radius: 5px;
+    font-family: 'Abhaya Libre';
+    font-size: 1.5em; 
+}
+.ButtonSearch{
+    width: 10%;
+    background-color: transparent;
+    border: 2px solid #FFF;
+    border-radius: 5px;
+}
+
+.LoupeImage{
+    width: 95%;
+    height: 95%;
+}
+
+.ImageArea{
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    place-items: center;
+    overflow: auto;
+    max-height: 70vh;
+}
+.ImageItem{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background-color: #474343;
+    border-radius: 20px;
+    color: #FFF; 
+    font-family: 'Abhaya Libre';
+    margin-bottom: 7%;
+}
+.ImagePhoto{
+    width: 100%;
+    border-radius: 20px;
+}
+.ImageTitle{
+    font-size: 1.4rem;
+    padding-left: 3%;
+    padding-bottom: 2%;
+}
+.ImageSize{
+    font-size: 1.2rem;
+    padding-left: 3%;
+}
+.LoadMoreArea{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 5vh;
+}
+.LoadMoreButton{
+    width: 10%;
+    height: 90%;
+    border-radius: 8px;
+    font-family: 'Abhaya Libre';
+    font-size: 1.5em; 
+    margin-top: 0.5%;
+    border: 2px solid #FFF;
+    background-color: transparent;
+    color: white;
+}
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  background-color: #FFF;
+  background-image: -webkit-linear-gradient(top,
+                        #015724 0%,
+                        #bfe8f9 50%,
+                        #9fd8ef 51%,
+                        #015724 100%);
+}
+
+.OptionsArea{
+    position: initial;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #474343;
+    margin-left: 78%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-family: 'Abhaya Libre';
+    text-align: center;
+}
+.OptionsText{
+    margin-top: 70%;
+}

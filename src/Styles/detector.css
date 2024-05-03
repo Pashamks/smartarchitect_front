@@ -3,7 +3,7 @@
 .UploadImageBox {
     position: relative;
     width: 100%;
-    height: 400px; 
+    height: 50vh; 
     background-size: cover;
 }
 
@@ -168,4 +168,15 @@
     font-family: 'Abhaya Libre';
     font-size: 2.2em; 
     margin-left: 3%;
+}
+.Popup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    color: white;
+    font-family: 'Abhaya Libre';
+    font-size: 2.2em; 
+    margin-top: 2%;
+    left: 39%;
 }
