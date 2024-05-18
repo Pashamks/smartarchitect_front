@@ -1,0 +1,41 @@
+.modal-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 20%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 2px solid #000;
+  }
+  .error-msg {
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: space-between; /* Change to space-between */
+    align-items: center; /* Align items vertically */
+}
+.error-text{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.image-container{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+}
+.error-msg p {
+    flex: 1; /* Allow the paragraph to grow and shrink */
+}
+
+.closeImage {
+    width: 50%;
+    height: 50%;
+    flex-shrink: 0; /* Prevent the image from shrinking */
+}

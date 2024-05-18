@@ -180,3 +180,16 @@
     margin-top: 2%;
     left: 39%;
 }
+.ResultItem{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5%;
+    font-size: 1.4rem;
+}
+.StyleName{
+    width: 40%;
+    padding-left: 10%;
+}
+.Percentege{
+    width: 30%;
+}

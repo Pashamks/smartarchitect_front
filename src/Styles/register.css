@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Itim&family=Metal&display=swap');
 
-.LoginArea{
+.RegisterArea{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,7 +9,7 @@
     font-family: 'Abhaya Libre';
     height: 70vh;
 }
-.WelcomeText{
+.SignUpText{
     color: white;
     font-size: 3rem;
     margin-bottom: 4%;
@@ -23,6 +23,11 @@
     font-size: 1.6rem;
     background-color: white;
 }
+.button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 .UserImage{
     width: 13%;
     height: 80%;
@@ -60,8 +65,17 @@
     width: 100%;
     border-radius: 15px;
 }
-
-.LoginButtonArea{
+.ConfirmPasswordBox{
+    display: flex;
+    border: 2px solid #000;
+    border-radius: 20px;
+    margin-top: 2%;
+    width: 20%;
+    height: 10%;
+    font-size: 1.6rem;
+    background-color: white;
+}
+.SignButtonArea{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,21 +83,19 @@
     height: 10%;
     margin-top: 2%;
 }
-.LoginButton{
-    height: 80%;
+.RegisterButton{
+    height: 90%;
     width: 10%;
     border-radius: 7px;
     font-size: 1.6rem;
     font-family: 'Abhaya Libre';
 }
-
-.NoAccountArea{
+.AccountArea{
     font-family: 'Abhaya Libre';
     color: white;
     font-size: 2rem;
     margin-top: 5%;
 }
-
-.SignText{
+.LoginText{
     text-decoration: underline;
 }

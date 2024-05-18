@@ -1,38 +1,45 @@
 import React, { useState } from "react";
 import { useAuth } from "../Authentication/AuthProvider";
-import { useNavigate, useLocation } from "react-router-dom";
-import "C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarchitect\\src\\Styles\\login.css"
-import User from "C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarchitect\\src\\Images\\user.png"
-import View from "C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarchitect\\src\\Images\\view.png"
-import Hidden from "C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarchitect\\src\\Images\\hidden.png"
-
+import { useNavigate } from "react-router-dom";
+import "../../Styles/login.css"
+import User from "../../Images/user.png"
+import View from "../../Images/view.png"
+import Hidden from "../../Images/hidden.png"
+import ErrorModel from "../ErrorModal"
 
 function Login(){
-    const [user, setUser] = useState(null);
     const { login } = useAuth();
+    const [error, setError] = useState();
+
     const navigate = useNavigate();
-    const location = useLocation();
+
+    const errorHandler = () => {
+        setError(null)
+      }
 
     const handleLogin = () => {
-        login(user);
-    };
-
-    function handleEmailEnter(){
-        var input = document.getElementById("emailInput");
         
-    }
+        login({
+            email : emailValue,
+            password : passwordValue,
+            error : {error, setError}
+        });
+        
+    };
 
     const [emailValue, setValue] = useState('Email');
     const [passwordValue, setPasswordValue] = useState('Password');
-
-    const defaultText = 'Введіть текст...';
+    const [isImageChanged, setImageChanged] = useState(false);
   
-    const handleChange = (event) => {
+    const handleEmailChange = (event) => {
       setValue(event.target.value);
 
     };
+    const handlePasswordChange = (event) => {
+        setPasswordValue(event.target.value);
   
-    const handleEmailFocus = () => {
+      };
+    const handleEmailFocus = (text) => {
         if(emailValue == "Email")
             setValue('');
     };
@@ -54,37 +61,49 @@ function Login(){
         
     };
 
-    function imageChange(){
+    function handleRegister(){
+        navigate("/register")
+    }
 
+    function imageChange(){
+        if(!isImageChanged){
+            document.getElementById("PasswordIcon").src = Hidden;
+            setImageChanged(true);
+            document.getElementById("inputPassword").type = "password"
+        }
+        else{
+            setImageChanged(false);
+            document.getElementById("PasswordIcon").src = View;
+            document.getElementById("inputPassword").type = "text"
+        }
     }
 
     return (
         <div className="LoginArea">
-            <div className="WelcomeText">Welcome back</div>
-            <form className="Form">
-                <div className="EmailBox">
+         {error && <ErrorModel title={error.title} message={error.message} onClose={errorHandler} /> }
+            <div className="WelcomeText">Welcome back!</div>
+            <div className="EmailBox">
                     <img className="UserImage" src={User}></img>
                     <input 
                         value={emailValue}
-                        onChange={handleChange}
+                        onChange={handleEmailChange}
                         onFocus={handleEmailFocus}
                         onBlur={handleEmailBlur} type="email"  id="emailInput" className="EmailInput" ></input>
-                </div>
+            </div>
                 <div className="PasswordBox">
                     <img id="PasswordIcon" onClick={imageChange} className="UserImage" src={View}></img>
                     <input  value={passwordValue}
-                        onChange={handleChange}
+                        onChange={handlePasswordChange}
                         onFocus={handlePasswordFocus}
-                        onBlur={handlePasswordBlur} className="PasswordInput" ></input>  
+                        onBlur={handlePasswordBlur} className="PasswordInput" id="inputPassword" ></input>  
                 </div>
-                <div>
-                    <button className="LoginButton">Login</button>
+                <div className="LoginButtonArea">
+                    <button className="LoginButton" onClick={handleLogin}>Login</button>
                 </div>
-            </form>
             
             <div className="NoAccountArea">
                 Don't have an account? 
-                <a>Sign up!</a>
+                <a onClick={handleRegister} className="SignText"> Sign up!</a>
             </div>
         </div>
     );

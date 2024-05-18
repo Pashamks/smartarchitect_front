@@ -1,5 +1,5 @@
-import "C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarchitect\\src\\Styles\\detector.css"
-import UploadIcon from "C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarchitect\\src\\Images\\upload.png"
+import "../../Styles/detector.css"
+import UploadIcon from "../../Images/upload.png"
 import { useDropzone } from 'react-dropzone';
 import React, { useState, useCallback } from 'react';
 
@@ -7,6 +7,7 @@ function Detector(){
     const [isFileUploaded, setIsFileUploaded] = useState(false);
     const [isDetectStarted, setIsDetectStarted] = useState(false);
     const [isImageSaved, setIsImageSaved] = useState(false);
+    const [detectionResults, setDetectionResults] = useState([]);
 
 
     const onDrop = useCallback((acceptedFiles) => {
@@ -21,6 +22,30 @@ function Detector(){
     
     function detectClick(){
         setIsDetectStarted(true);
+        const imageUrl = document.getElementById("uploadedImageId").src;
+
+        fetch(imageUrl)
+        .then(response => response.blob())
+        .then(blob => {
+            // Створюємо FormData та додаємо зображення у форматі Blob
+            const formdata = new FormData();
+            formdata.append("File", blob, "image.jpg"); // Ім'я файлу може бути будь-яким
+
+            const requestOptions = {
+                method: "POST",
+                body: formdata,
+                redirect: "follow"
+            };
+
+            fetch("http://localhost:5038/api/Detection", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    setDetectionResults(result.stylesPrecentegase);
+                    console.log(result.stylesPrecentegase)
+                })
+                .catch(error => console.error(error));
+        })
+        .catch(error => console.error(error));
         document.querySelector(".UploadedImageArea").style.display = 'none';
         document.getElementById("originImageId").src = document.getElementById("uploadedImageId").src;
     }
@@ -29,6 +54,7 @@ function Detector(){
         setIsDetectStarted(false);
         setIsFileUploaded(false);
         setIsImageSaved(false);
+        setDetectionResults([]);
         document.getElementById('popupId').style.display = 'none';
     }
 
@@ -94,7 +120,14 @@ function Detector(){
                             <img id="originImageId"></img>
                         </div>
                         <div className="ResultsArea">
-                            <div className="ResultsBox"></div>
+                            <div className="ResultsBox">
+                            {Object.keys(detectionResults).map(x => (
+                                <div className="ResultItem">
+                                    <div className="StyleName" key={x.key}>{x}</div>
+                                    <div className="Percentege">{detectionResults[x]}%</div>
+                                </div>                               
+                            ))}
+                            </div>
                         </div>
                     </div>
                     <div className="ButtonsArea">

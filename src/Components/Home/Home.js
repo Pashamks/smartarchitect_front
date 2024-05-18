@@ -1,4 +1,4 @@
-import "C:\\Users\\pavlo\\Desktop\\4.1\\Diploma\\front\\smartarchitect\\src\\Styles\\home.css"
+import "../../Styles/home.css"
 
 
 function Home(){

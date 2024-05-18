@@ -11,6 +11,18 @@
     width: 35%; 
     height: 40vh; 
     background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 35px;
+    color: #FFFFFF;
+    font-family: 'Abhaya Libre';
+    text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 
 }
 .SecondImageBox{
@@ -18,5 +30,72 @@
     width: 35%; 
     height: 40vh; 
     background-color: rgba(255, 255, 255, 0.5);
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 35px;
+    color: #FFFFFF;
+    font-family: 'Abhaya Libre';
+    text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+.UploadPhoto {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 4%;
+}
+.UploadPhoto img {
+    width: 130px; 
+}
+.BeforeConstructorArea{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    display: none;
+    margin-top: 5%;
+    margin-left: 8%;
+    width: 85%;
+    height: 100px;
+}
+.FirstImageBoxUploaded{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 5px;
+    width: 40%;
+    height: 60%;
+    top: 10%;
+}
+.SecondImageBoxUploaded{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 5px;
+    width: 40%;
+    height: 60%;
+    top: 10%;
+}
+.UploadedImage{
+    width: auto; 
+    height: auto;
+    max-height: 50vh;
+    border: 3px dashed #FFFFFF;
+    margin-left: 4%;
+}
+.TryAgainButton{
+    background-color: transparent;
+    color: white;
+    border: 2px solid #FFF;
+    font-family: 'Abhaya Libre';
+    font-size: 2.2em; 
 }
