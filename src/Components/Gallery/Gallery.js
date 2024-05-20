@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import "../../Styles/gallery.css"
-import House from "../../Images/house.jpg"
-import House2 from "../../Images/house2.jpg"
 import Loupe from "../../Images/loupe.png"
 import { saveAs } from 'file-saver'
-
-const defaultImages = [
-    { id: 1, src: House, title: 'Назва стилю 1', description: '3h' },
-    { id: 2, src: House2, title: 'Назва стилю 2', description: '5h' },
-    { id: 3, src: House, title: 'Назва стилю 2', description: '5h' },
-    { id: 4, src: House2, title: 'Назва стилю 2', description: '5h' },
-    { id: 5, src: House, title: 'Назва стилю 2', description: '5h' },
-    { id: 6, src: House2, title: 'Назва стилю 2', description: '5h' },
-    { id: 7, src: House, title: 'Назва стилю 2', description: '5h' },
-    { id: 8, src: House2, title: 'Назва стилю 2', description: '5h' },
-    { id: 9, src: House, title: 'Назва стилю 2', description: '5h' },
-    { id: 10, src: House, title: 'Назва стилю 2', description: '5h' },
-  ];
 
 function Gallery(){
     const [images, setImages] = useState([]);
     const [editBox, setEditBox] = useState(false);
     const [selectedImageId, setSelectedImageId] = useState(null);
-
-    useEffect(() => {
-        setImages(defaultImages);
-      }, []);
+    const [imageCount, setImageCount] = useState(10);
+    const [inputStyle, setInputStyle] = useState("")
 
     function loadMore(){
-        setImages(images.concat(images));
+
+        fetch("http://localhost:5038/api/Gallery?take=10&skip="+imageCount, requestOptions2)
+            .then((response) => response.json())
+            .then((result) => {
+                setImages(images.concat(result));
+
+            })
+            .catch((error) => console.error(error));
+        setImageCount(imageCount + 10);
     }
 
 
@@ -43,19 +34,60 @@ function Gallery(){
     }
 
     function deleteOption(imageId){
+
+        const requestOptions = {
+            method: "DELETE",
+            redirect: "follow"
+          };
+          
+          fetch("http://localhost:5038/api/Gallery/"+imageId, requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
+
         setImages(images.filter(function (img){
             return img.id != imageId
         }));
-    }
 
-    function DownloadOption(imageId){
-        const imageToDownload = defaultImages.find(image => image.id === imageId);
+        if(images.length < 10){
+            fetch("http://localhost:5038/api/Gallery?take=1&skip="+images.length, requestOptions2)
+            .then((response) => response.json())
+            .then((result) => {
+                setImages(images.concat(result));
 
-        if (imageToDownload) {
-            saveAs(imageToDownload.src, 'image.jpg')
+            })
+            .catch((error) => console.error(error));
         }
     }
 
+    const DownloadOption= async (imageId) => {
+        const imageToDownload = images.find(image => image.id === imageId);
+        try {
+            const response = await fetch(imageToDownload.imagePath, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            });
+            const blob = await response.blob();
+            saveAs(blob, `${imageToDownload.imageName}.png`);
+        } catch (error) {
+            console.error("Error downloading the image:", error);
+        }
+    }
+    function findImagesByStyle(){
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+          };
+          
+          fetch("http://localhost:5038/api/Gallery?take=10&filter[logic]=and&filter[filters][0][field]=styleName&filter[filters][0][operator]=contains&filter[filters][0][value]="+inputStyle, requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                setImages(result);
+            })
+            .catch((error) => console.error(error));
+    }
         const myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
 
@@ -68,20 +100,32 @@ function Gallery(){
         fetch("http://localhost:5000/api/Permission?email=" + localStorage.getItem("email"), requestOptions)
         .then((response) => response.json())
         .then((result) => {
-            console.log(result);
             console.log(result.roles.permissions.includes("delete:pictures:all"));
 
             if(result.roles.permissions.includes("delete:pictures:all")){
                 setEditBox(true);
             }
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.error(""));
+
+         var requestOptions2 = {
+            method: "GET",
+            redirect: "follow"
+          };
+          
+          fetch("http://localhost:5038/api/Gallery?take=10", requestOptions2)
+            .then((response) => response.json())
+            .then((result) => {
+                if(images.length == 0)
+                    setImages(result);
+            })
+            .catch((error) => console.error(error));
     return (
         <div>
             <div className='SearchArea'>
                 <div className='SearchBox'>
-                    <input className='InputText'></input>
-                    <button className='ButtonSearch'>
+                    <input className='InputText' value={inputStyle} onChange={(e) => setInputStyle(e.target.value)}></input>
+                    <button className='ButtonSearch' onClick={findImagesByStyle}>
                         <img className='LoupeImage' src={Loupe}></img>
                     </button>
                 </div>
@@ -93,10 +137,10 @@ function Gallery(){
             {images.map((image) => (
                 <div key={image.id} className="ImageItem">
                     <div className='ImagePhotoArea'>
-                        <img className='ImagePhoto' src={image.src} alt={image.title} />
+                        <img className='ImagePhoto' src={image.imagePath} alt={image.imageName} />
                      </div>   
-                    <div className='ImageTitle'>{image.title}</div>
-                    <div className='ImageSize'>{image.description}</div>
+                    <div className='ImageTitle'>{image.imageName}</div>
+                    <div className='ImageSize'>{image.styleName}</div>
                     <div className='OptionsArea' onClick={() => showOptions(image.id)}>
                         <p className='OptionsText'>...</p>
                     </div>

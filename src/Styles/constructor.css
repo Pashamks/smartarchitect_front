@@ -73,6 +73,7 @@
     width: 40%;
     height: 60%;
     top: 10%;
+    margin-left: 2%;
 }
 .SecondImageBoxUploaded{
     display: flex;
@@ -81,16 +82,15 @@
     justify-content: center;
     position: relative;
     padding: 5px;
-    width: 40%;
-    height: 60%;
+
+    height: 100%;
     top: 10%;
 }
-.UploadedImage{
+.UploadedImageConstructor{
     width: auto; 
     height: auto;
     max-height: 50vh;
     border: 3px dashed #FFFFFF;
-    margin-left: 4%;
 }
 .TryAgainButton{
     background-color: transparent;
@@ -98,4 +98,19 @@
     border: 2px solid #FFF;
     font-family: 'Abhaya Libre';
     font-size: 2.2em; 
+}
+.ConstructorArea{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    display: none;
+    margin-top: 5%;
+    margin-left: 8%;
+    width: 85%;
+    height: 100px;
+}
+.CroppedImage{
+    max-width: 100%;
+    max-height: 100%;
 }

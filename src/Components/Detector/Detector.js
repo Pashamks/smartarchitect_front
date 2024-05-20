@@ -59,6 +59,29 @@ function Detector(){
     }
 
     function saveToGallery(){
+        const imageUrl = document.getElementById("uploadedImageId").src;
+        
+        fetch(imageUrl)
+        .then(response => response.blob())
+        .then(blob => {
+            const formdata = new FormData();
+            formdata.append("File", blob, "image.jpg"); // Ім'я файлу може бути будь-яким
+            formdata.append("Style", "Gothic");
+            formdata.append("Email", "admin@test.com");
+
+            const requestOptions = {
+                method: "POST",
+                body: formdata,
+                redirect: "follow"
+            };
+
+            fetch("http://localhost:5038/api/Gallery", requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
+        })
+        .catch(error => console.error(error));
+
         var txt = "Image successfully saved to gallery!";
         var speed = 100;
         var i = 0;
