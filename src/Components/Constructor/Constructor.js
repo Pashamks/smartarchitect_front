@@ -102,13 +102,13 @@ function Constructor(){
         setIsDetectStarted(false);
     }
     function SaveImageToGallery(){
-        const imageUrl = document.getElementById("uploadedImage1Id").src;
+        const imageUrl = document.getElementById("uploadedImageId").src;
         
         fetch(imageUrl)
         .then(response => response.blob())
         .then(blob => {
             const formdata = new FormData();
-            formdata.append("File", blob, "image.jpg"); // Ім'я файлу може бути будь-яким
+            formdata.append("File", blob, "image.jpg");
             formdata.append("Style", "Georgian");
             formdata.append("Email", "admin@test.com");
 
@@ -147,7 +147,26 @@ function Constructor(){
         });
     
         const imageURL = canvas.toDataURL('image/png');
-    
+        fetch(imageURL)
+        .then(response => response.blob())
+        .then(blob => {
+            const formdata = new FormData();
+            formdata.append("File", blob, "image.jpg");
+            formdata.append("Style", "Georgian");
+            formdata.append("Email", "admin@test.com");
+
+            const requestOptions = {
+                method: "POST",
+                body: formdata,
+                redirect: "follow"
+            };
+
+            fetch("http://localhost:5038/api/Gallery", requestOptions)
+            .then((response) => response.text())
+            .then((result) => console.log(result))
+            .catch((error) => console.error(error));
+        })
+        .catch(error => console.error(error));
         const link = document.createElement('a');
         link.href = imageURL;
         link.download = 'merged_image.png';
