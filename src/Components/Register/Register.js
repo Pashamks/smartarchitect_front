@@ -86,7 +86,7 @@ function Register(){
         redirect: "follow"
         };
 
-        fetch("http://localhost:5000/api/account/signup", requestOptions)
+        fetch(process.env.REACT_APP_IDENTITY_URL + "/api/account/signup", requestOptions)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(response.text());

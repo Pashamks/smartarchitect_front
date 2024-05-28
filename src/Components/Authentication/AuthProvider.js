@@ -38,8 +38,7 @@ export const AuthProvider = ({ children }) => {
             body: urlencoded,
             redirect: "follow"
         };
-
-        fetch("http://localhost:5000/connect/token", requestOptions)
+        fetch(process.env.REACT_APP_IDENTITY_URL + "/connect/token", requestOptions)
         .then((response) => response.json())
         .then((result) => {
             

@@ -23,6 +23,7 @@
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+    margin-left: 2%;
 
 }
 .SecondImageBox{
@@ -42,6 +43,7 @@
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+    margin-right: 2%;
 }
 .UploadPhoto {
     background-color: transparent;
@@ -85,6 +87,11 @@
 
     height: 100%;
     top: 10%;
+    margin-right: 3%;
+}
+.OptionImage{
+    width: 50px;
+    height: 50px;
 }
 .UploadedImageConstructor{
     width: auto; 
@@ -110,7 +117,21 @@
     width: 85%;
     height: 100px;
 }
+.BoxBetween{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    height: 100%;
+}
 .CroppedImage{
     max-width: 100%;
     max-height: 100%;
 }
+    /*border-radius: 50%;
+}
+.cropper-crop-box,
+.cropper-view-box {
+  border-radius: 50%;
+}*/

@@ -81,7 +81,7 @@ function Gallery(){
             redirect: "follow"
           };
           
-          fetch("http://localhost:5038/api/Gallery?take=10&filter[logic]=and&filter[filters][0][field]=styleName&filter[filters][0][operator]=contains&filter[filters][0][value]="+inputStyle, requestOptions)
+          fetch(process.env.REACT_APP_BUSINESS_LOGIC_URL + "/api/Gallery?take=10&filter[logic]=and&filter[filters][0][field]=styleName&filter[filters][0][operator]=contains&filter[filters][0][value]="+inputStyle, requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 setImages(result);
@@ -97,7 +97,7 @@ function Gallery(){
         redirect: "follow"
         };
 
-        fetch("http://localhost:5000/api/Permission?email=" + localStorage.getItem("email"), requestOptions)
+        fetch(process.env.REACT_APP_IDENTITY_URL + "/api/Permission?email=" + localStorage.getItem("email"), requestOptions)
         .then((response) => response.json())
         .then((result) => {
             console.log(result.roles.permissions.includes("delete:pictures:all"));
@@ -113,7 +113,7 @@ function Gallery(){
             redirect: "follow"
           };
           
-          fetch("http://localhost:5038/api/Gallery?take=10", requestOptions2)
+          fetch(process.env.REACT_APP_BUSINESS_LOGIC_URL + "/api/Gallery?take=10", requestOptions2)
             .then((response) => response.json())
             .then((result) => {
                 if(images.length == 0)

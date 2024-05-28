@@ -1,5 +1,7 @@
 import "../../Styles/constructor.css"
 import UploadIcon from "../../Images/upload.png"
+import Squere from "../../Images/dot-square.png"
+import Circle from "../../Images/shape.png"
 import React, { useCallback, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Cropper from 'react-cropper';
@@ -11,6 +13,7 @@ function Constructor(){
     const [isFile2Uploaded, setIsFile2Uploaded] = useState(false);
     const [isDetectStarted, setIsDetectStarted] = useState(false);
     const [isConstructionStoped, setIsConstructionStoped] = useState(false);
+    const [isRoundCropp, setIsRoundCropp] = useState(false);
 
     const [image1Url, setImage1Url] = useState(null);
     const [image2Url, setImage2Url] = useState(null);
@@ -28,6 +31,21 @@ function Constructor(){
         setCroppedImage(croppedCanvas.toDataURL());
         setCroppedImageDimensions({ width: croppedCanvas.width, height: croppedCanvas.height });
     };
+    const [crop, setCrop] = useState({ x: 0, y: 0 })
+    const [zoom, setZoom] = useState(1)
+
+    const onCropChange = (crop) => {
+        setCrop(crop)
+      }
+    
+      const onCropComplete = (croppedArea, croppedAreaPixels) => {
+        console.log(croppedAreaPixels.width / croppedAreaPixels.height)
+      }
+    
+      const onZoomChange = (zoom) => {
+        setZoom(zoom)
+      }
+
     const fixCroppedImage = () => {
         var dragImage = document.getElementById("draggImageId");
         console.log(dragImage.width + " " + dragImage.height)
@@ -118,7 +136,7 @@ function Constructor(){
                 redirect: "follow"
             };
 
-            fetch("http://localhost:5038/api/Gallery", requestOptions)
+            fetch(process.env.REACT_APP_BUSINESS_LOGIC_URL + "/api/Gallery", requestOptions)
             .then((response) => response.text())
             .then((result) => console.log(result))
             .catch((error) => console.error(error));
@@ -161,7 +179,7 @@ function Constructor(){
                 redirect: "follow"
             };
 
-            fetch("http://localhost:5038/api/Gallery", requestOptions)
+            fetch(process.env.REACT_APP_BUSINESS_LOGIC_URL + "/api/Gallery", requestOptions)
             .then((response) => response.text())
             .then((result) => console.log(result))
             .catch((error) => console.error(error));
@@ -203,7 +221,11 @@ function Constructor(){
                         crop={onCrop}
                         ref={cropperRef}
                     />
-      
+                   
+                </div>
+                <div className="BoxBetween">
+                    <img className="OptionImage" src={Squere}></img>
+                    <img className="OptionImage" src={Circle}></img>
                 </div>
                 <div className="SecondImageBox" {...getRootPropsSecond()}  style={{ display: isFile2Uploaded ? 'none' : 'flex' }}>
                     <button className="UploadPhoto">

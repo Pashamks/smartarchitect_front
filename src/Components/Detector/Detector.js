@@ -27,7 +27,6 @@ function Detector(){
         fetch(imageUrl)
         .then(response => response.blob())
         .then(blob => {
-            // Створюємо FormData та додаємо зображення у форматі Blob
             const formdata = new FormData();
             formdata.append("File", blob, "image.jpg"); // Ім'я файлу може бути будь-яким
 
@@ -37,7 +36,7 @@ function Detector(){
                 redirect: "follow"
             };
 
-            fetch("http://localhost:5038/api/Detection", requestOptions)
+            fetch(process.env.REACT_APP_BUSINESS_LOGIC_URL + "/api/Detection", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     setDetectionResults(result.stylesPrecentegase);
@@ -75,7 +74,7 @@ function Detector(){
                 redirect: "follow"
             };
 
-            fetch("http://localhost:5038/api/Gallery", requestOptions)
+            fetch(process.env.REACT_APP_BUSINESS_LOGIC_URL + "/api/Gallery", requestOptions)
             .then((response) => response.text())
             .then((result) => console.log(result))
             .catch((error) => console.error(error));
