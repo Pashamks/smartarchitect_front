@@ -2,7 +2,8 @@ import "../../Styles/constructor.css"
 import UploadIcon from "../../Images/upload.png"
 import Squere from "../../Images/dot-square.png"
 import Circle from "../../Images/shape.png"
-import React, { useCallback, useRef, useState } from 'react';
+import Triangle from "../../Images/triangle.png"
+import React, { useCallback, useRef, useState  } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
@@ -13,11 +14,13 @@ function Constructor(){
     const [isFile2Uploaded, setIsFile2Uploaded] = useState(false);
     const [isDetectStarted, setIsDetectStarted] = useState(false);
     const [isConstructionStoped, setIsConstructionStoped] = useState(false);
-    const [isRoundCropp, setIsRoundCropp] = useState(false);
 
     const [image1Url, setImage1Url] = useState(null);
     const [image2Url, setImage2Url] = useState(null);
     const [croppedImage, setCroppedImage] = useState(null);
+    const [isTriangleSelected, setIsTriangleSelected] = useState(false);
+    const [isCircleSelected, setIsCircleSelected] = useState(false);
+
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [croppedImageDimensions, setCroppedImageDimensions] = useState({ width: 0, height: 0 });
     const [image2Dimensions, setImage2Dimensions] = useState({ width: 'auto', height: 'auto' });
@@ -31,20 +34,6 @@ function Constructor(){
         setCroppedImage(croppedCanvas.toDataURL());
         setCroppedImageDimensions({ width: croppedCanvas.width, height: croppedCanvas.height });
     };
-    const [crop, setCrop] = useState({ x: 0, y: 0 })
-    const [zoom, setZoom] = useState(1)
-
-    const onCropChange = (crop) => {
-        setCrop(crop)
-      }
-    
-      const onCropComplete = (croppedArea, croppedAreaPixels) => {
-        console.log(croppedAreaPixels.width / croppedAreaPixels.height)
-      }
-    
-      const onZoomChange = (zoom) => {
-        setZoom(zoom)
-      }
 
     const fixCroppedImage = () => {
         var dragImage = document.getElementById("draggImageId");
@@ -55,24 +44,34 @@ function Constructor(){
         };
         
         if (croppedImage) {
+            let shape = 'square';
+            if (isTriangleSelected) shape = 'triangle';
+            if (isCircleSelected) shape = 'circle';
             setCroppedImages([
                 ...croppedImages,
-                { src: croppedImage, position: {...newPosition}, width:croppedImageDimensions.width, height: croppedImageDimensions.height  },
+                { src: croppedImage, position: {...newPosition}, width:croppedImageDimensions.width, height: croppedImageDimensions.height, shape: shape  },
             ]);
             setCroppedImage(null);
             setPosition({ x: 0, y: 0 });
         }
-        console.log(croppedImages);
     };
 
     function clearCrops(){
         setCroppedImages([]);
+        setIsTriangleSelected(false);
+        setIsCircleSelected(false);
+        let cropBox = document.querySelector(".cropper-crop-box");
+        let viewBox = document.querySelector(".cropper-view-box");
+        cropBox.classList.remove("triangle-mask");
+        viewBox.classList.remove("triangle-mask");
+        viewBox.style.borderRadius = '0';
     }
     const handleDrag = (e, data) => {
-        console.log(data);
-        setPosition({ x: data.x, y: data.y });
+        setPosition({ x: data.x, y: data.y });  
     };
-
+    const handleStop = () => {
+       
+      };
     const onDrop = useCallback((acceptedFiles) => {
         const imageUrl = URL.createObjectURL(acceptedFiles[0]);
         
@@ -109,6 +108,47 @@ function Constructor(){
         setIsDetectStarted(false);
     }
 
+    function selectSquere(){
+        const viewBox = document.querySelector('.cropper-view-box');
+        if (viewBox) {
+            viewBox.style.borderRadius = '0';
+        }
+        let cropBox = document.querySelector(".cropper-crop-box");
+
+        cropBox.classList.remove("triangle-mask");
+        viewBox.classList.remove("triangle-mask");
+        setIsTriangleSelected(false);
+        setIsCircleSelected(false);
+    }
+
+    function selectCircle(){
+        document.querySelector(".cropper-crop-box").style["border-radius"] = "50%";
+        document.querySelector(".cropper-view-box").style["border-radius"] = "50%";
+
+        let cropBox = document.querySelector(".cropper-crop-box");
+        let viewBox = document.querySelector(".cropper-view-box");
+        let croppedImage = document.querySelector(".CroppedImage");
+
+        cropBox.classList.remove("triangle-mask");
+        viewBox.classList.remove("triangle-mask");
+        setIsTriangleSelected(false);
+        setIsCircleSelected(true);
+    }
+    function selectTriangleUp() {
+        const roundViewBox = document.querySelector('.cropper-view-box');
+        if (roundViewBox) {
+            roundViewBox.style.borderRadius = '0';
+        }
+
+        let cropBox = document.querySelector(".cropper-crop-box");
+        let viewBox = document.querySelector(".cropper-view-box");
+
+        cropBox.classList.add("triangle-mask");
+        viewBox.classList.add("triangle-mask");
+        setIsTriangleSelected(true);
+        setIsCircleSelected(false);
+    }
+    
     function tryOtherImages(){
         setImage1Url(null);
         setImage2Url(null);
@@ -212,20 +252,25 @@ function Constructor(){
                 </div>
                 <div className="FirstImageBoxUploaded" style={{ display: isFile1Uploaded ? 'flex' : 'none' }}>
                     <img className="UploadedImageConstructor" id="uploadedImage1Id" style={{ display: image1Url == null ? 'flex' : 'none' }}></img>
-                    <Cropper className="UploadedImageConstructor" 
+                    <div className="CroppArea">
+                    <Cropper  
                         style={{ display: image1Url == null ? 'none' : 'flex' }}
                         src={image1Url}
                         initialAspectRatio={NaN}
                         aspectRatio={NaN}
                         guides={false}
+                        viewMode={1}
+                        background={false}
                         crop={onCrop}
                         ref={cropperRef}
                     />
-                   
+                    </div>
+                    
                 </div>
-                <div className="BoxBetween">
-                    <img className="OptionImage" src={Squere}></img>
-                    <img className="OptionImage" src={Circle}></img>
+                <div className="BoxBetween" style={{ display: isFile1Uploaded && isFile2Uploaded && isDetectStarted ? 'flex' : 'none' }}>
+                    <img className="OptionImage" src={Squere} onClick={selectSquere}></img>
+                    <img className="OptionImage" src={Circle} onClick={selectCircle}></img>
+                    <img className="OptionImage" src={Triangle} onClick={selectTriangleUp}></img>
                 </div>
                 <div className="SecondImageBox" {...getRootPropsSecond()}  style={{ display: isFile2Uploaded ? 'none' : 'flex' }}>
                     <button className="UploadPhoto">
@@ -243,7 +288,7 @@ function Constructor(){
                         <img
                             key={index}
                             src={img.src}
-                            className="CroppedImage"
+                            className={`CroppedImage ${img.shape}-mask`}
                             style={{
                                 position: 'absolute',
                                 cursor: 'move',
@@ -257,8 +302,10 @@ function Constructor(){
                         />
                         ))}
                         {croppedImage && (
-                            <Draggable position={position} onDrag={handleDrag} bounds="parent">
-                                <img src={croppedImage} className="CroppedImage" id="draggImageId" style={{
+                            <Draggable position={position} onDrag={handleDrag} bounds="parent" > 
+                                <img src={croppedImage} 
+                                className={`CroppedImage ${isTriangleSelected ? 'triangle-mask' : isCircleSelected ? 'circle-mask' : ''}`}
+                                id="draggImageId" style={{
                                         position: 'absolute',
                                         cursor: 'move',
                                         width: `${(croppedImageDimensions.width / image2Dimensions.width) * 100}%`,

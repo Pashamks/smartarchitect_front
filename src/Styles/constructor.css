@@ -73,7 +73,7 @@
     position: relative;
     padding: 5px;
     width: 40%;
-    height: 60%;
+    height: 50%;
     top: 10%;
     margin-left: 2%;
 }
@@ -92,12 +92,23 @@
 .OptionImage{
     width: 50px;
     height: 50px;
+    margin-top: 45%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10%;
 }
 .UploadedImageConstructor{
     width: auto; 
     height: auto;
     max-height: 50vh;
     border: 3px dashed #FFFFFF;
+}
+.CroppArea{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 .TryAgainButton{
     background-color: transparent;
@@ -117,6 +128,18 @@
     width: 85%;
     height: 100px;
 }
+.ConstructorAreaRound{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    display: none;
+    margin-top: 5%;
+    margin-left: 8%;
+    width: 85%;
+    height: 100px;
+    border-radius: 50%;
+}
 .BoxBetween{
     display: flex;
     flex-direction: column;
@@ -125,6 +148,12 @@
     width: 5%;
     height: 100%;
 }
+.triangle-mask {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Create a triangle */
+  }
+  .circle-mask {
+    border-radius: 50%;
+  }
 .CroppedImage{
     max-width: 100%;
     max-height: 100%;

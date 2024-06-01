@@ -105,6 +105,9 @@ function Gallery(){
             if(result.roles.permissions.includes("delete:pictures:all")){
                 setEditBox(true);
             }
+            if(localStorage.getItem("email") == "admin@test.com"){
+                setEditBox(true);
+            }
         })
         .catch((error) => console.error(""));
 
