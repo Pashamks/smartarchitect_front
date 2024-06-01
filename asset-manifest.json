@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/smartarchitect_front/static/css/main.a72c8ae3.css",
-    "main.js": "/smartarchitect_front/static/js/main.2cbf5065.js",
+    "main.css": "/smartarchitect_front/static/css/main.2fddbea5.css",
+    "main.js": "/smartarchitect_front/static/js/main.99f0cdda.js",
     "static/media/back.gif": "/smartarchitect_front/static/media/back.e1a1327a0315b8a03c26.gif",
     "static/media/loupe.png": "/smartarchitect_front/static/media/loupe.c6544d3156a8bde3d076.png",
     "static/media/user.png": "/smartarchitect_front/static/media/user.557587208eb9e232f2ca.png",
     "static/media/view.png": "/smartarchitect_front/static/media/view.e7501017e49c8516c9bc.png",
     "static/media/hidden.png": "/smartarchitect_front/static/media/hidden.ebcf90bc50f298aeb8cc.png",
     "static/media/shape.png": "/smartarchitect_front/static/media/shape.3c9357173235cef78028.png",
+    "static/media/triangle.png": "/smartarchitect_front/static/media/triangle.40beb4aad710973fd6c2.png",
     "index.html": "/smartarchitect_front/index.html",
-    "main.a72c8ae3.css.map": "/smartarchitect_front/static/css/main.a72c8ae3.css.map",
-    "main.2cbf5065.js.map": "/smartarchitect_front/static/js/main.2cbf5065.js.map"
+    "main.2fddbea5.css.map": "/smartarchitect_front/static/css/main.2fddbea5.css.map",
+    "main.99f0cdda.js.map": "/smartarchitect_front/static/js/main.99f0cdda.js.map"
   },
   "entrypoints": [
-    "static/css/main.a72c8ae3.css",
-    "static/js/main.2cbf5065.js"
+    "static/css/main.2fddbea5.css",
+    "static/js/main.99f0cdda.js"
   ]
 }
