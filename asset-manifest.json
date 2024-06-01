@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/smartarchitect_front/static/css/main.2fddbea5.css",
-    "main.js": "/smartarchitect_front/static/js/main.99f0cdda.js",
+    "main.js": "/smartarchitect_front/static/js/main.d7dbc125.js",
     "static/media/back.gif": "/smartarchitect_front/static/media/back.e1a1327a0315b8a03c26.gif",
     "static/media/loupe.png": "/smartarchitect_front/static/media/loupe.c6544d3156a8bde3d076.png",
     "static/media/user.png": "/smartarchitect_front/static/media/user.557587208eb9e232f2ca.png",
@@ -11,10 +11,10 @@
     "static/media/triangle.png": "/smartarchitect_front/static/media/triangle.40beb4aad710973fd6c2.png",
     "index.html": "/smartarchitect_front/index.html",
     "main.2fddbea5.css.map": "/smartarchitect_front/static/css/main.2fddbea5.css.map",
-    "main.99f0cdda.js.map": "/smartarchitect_front/static/js/main.99f0cdda.js.map"
+    "main.d7dbc125.js.map": "/smartarchitect_front/static/js/main.d7dbc125.js.map"
   },
   "entrypoints": [
     "static/css/main.2fddbea5.css",
-    "static/js/main.99f0cdda.js"
+    "static/js/main.d7dbc125.js"
   ]
 }
