@@ -183,7 +183,7 @@ function Constructor(){
         })
         .catch(error => console.error(error));
     }
-    const downloadMergedImage = () => {
+    const downloadMergedImage = async () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         var uploadedImage2Id = document.getElementById("uploadedImage2Id");
@@ -192,17 +192,39 @@ function Constructor(){
         canvas.height = uploadedImage2Id.height;
     
         ctx.drawImage(uploadedImage2Id, 0, 0);
+        const loadImage = (img) => {
+            return new Promise((resolve) => {
+                const image = new Image();
+                image.src = img.src;
+                image.onload = () => resolve({ image, img });
+            });
+        };
+        for (const img of croppedImages) {
+            const { image, img: imgData } = await loadImage(img);
     
-        croppedImages.forEach(img => {
-            const image = new Image();
-            const x = (img.position.x / 100) * uploadedImage2Id.width;
-            const y = (img.position.y / 100) * uploadedImage2Id.height;
-            const width = img.width ;
-            const height = img.height;
-            image.src = img.src;
-
+            const x = (imgData.position.x / 100) * uploadedImage2Id.width;
+            const y = (imgData.position.y / 100) * uploadedImage2Id.height;
+            const width = imgData.width;
+            const height = imgData.height;
+    
+            ctx.save();
+    
+            if (imgData.shape === 'triangle') {
+                ctx.beginPath();
+                ctx.moveTo(x + width / 2, y);
+                ctx.lineTo(x, y + height);
+                ctx.lineTo(x + width, y + height);
+                ctx.closePath();
+                ctx.clip();
+            } else if (imgData.shape === 'circle') {
+                ctx.beginPath();
+                ctx.ellipse(x + width / 2, y + height / 2, width / 2, height / 2, 0, 0, 2 * Math.PI);
+                ctx.clip();
+            }
+    
             ctx.drawImage(image, x, y, width, height);
-        });
+            ctx.restore();
+        }
     
         const imageURL = canvas.toDataURL('image/png');
         fetch(imageURL)
@@ -225,11 +247,6 @@ function Constructor(){
             .catch((error) => console.error(error));
         })
         .catch(error => console.error(error));
-        const link = document.createElement('a');
-        link.href = imageURL;
-        link.download = 'merged_image.png';
-    
-        link.dispatchEvent(new MouseEvent('click'));
     };
     const handleImage2Load = (e) => {
         setImage2Dimensions({
