@@ -6,7 +6,7 @@ function Home(){
     return(
         <div>
             <div className = "MainText">
-            WHAT STYLE IS YOUR HOUSE?
+            WHAT DO YOU KNOW ABOUT HILDTICH?
             </div>
             <div className="SimpleText">
             Find out in this application.

@@ -7,7 +7,6 @@ import {
 import "../Styles/main.css"
 import Home from "./Home/Home";
 import Detector from "./Detector/Detector";
-import Constructor from "./Constructor/Constructor";
 import Gallery from "./Gallery/Gallery";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
@@ -30,11 +29,8 @@ import { useNavigate } from "react-router-dom";
                 <a onClick={regirect("/home")}>
                     HOME
                 </a>
-                <a onClick={regirect("/detect")}>
-                    STYLE DETECTION
-                </a>
-                <a onClick={regirect("/constructor")}>
-                    FACADE CONSTRUCTOR
+                <a onClick={regirect("/skeleton")}>
+                    BUILD SKELETON
                 </a>
                 <a onClick={regirect("/gallery")}>
                     GALLERY
@@ -44,8 +40,7 @@ import { useNavigate } from "react-router-dom";
                 { localStorage.getItem("accessToken") != "" && localStorage.getItem("accessToken") != null ?
                 <Routes>
                 <Route path="/home" element={<Home></Home>}></Route>
-                <Route path="/detect" element={<Detector></Detector>}></Route>
-                <Route path="/constructor" element={<Constructor></Constructor>}></Route>
+                <Route path="/skeleton" element={<Detector></Detector>}></Route>
                 <Route path="/gallery" element={<Gallery></Gallery>}></Route>
                 <Route path="*" element={<Navigate replace to="/home" ></Navigate>}></Route>
                 </Routes>

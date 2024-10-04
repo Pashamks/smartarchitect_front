@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import "../../Styles/gallery.css"
 import Loupe from "../../Images/loupe.png"
+import Sonik from "../../Images/sonik.jpg"
+import SkeletonSonik from "../../Images/skeleton_sonik.jpg"
+import BlackSonik from "../../Images/black_sonik.jpg"
+
 import { saveAs } from 'file-saver'
 
 function Gallery(){
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState([
+        {imagePath : Sonik, imageName : "Sonik"},
+        {imagePath : BlackSonik, imageName : "Black Sonik"},
+        {imagePath : SkeletonSonik, imageName : "Skeleton Sonik"},
+        {imagePath : Sonik, imageName : "Sonik"},
+        {imagePath : BlackSonik, imageName : "Black Sonik"},
+        {imagePath : SkeletonSonik, imageName : "Skeleton Sonik"},
+        {imagePath : Sonik, imageName : "Sonik"},
+        {imagePath : BlackSonik, imageName : "Black Sonik"},
+        {imagePath : SkeletonSonik, imageName : "Skeleton Sonik"}
+
+    ]);
     const [editBox, setEditBox] = useState(false);
     const [selectedImageId, setSelectedImageId] = useState(null);
     const [imageCount, setImageCount] = useState(10);

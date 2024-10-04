@@ -125,7 +125,7 @@ function Detector(){
                     <img className="UploadedImage" id="uploadedImageId"></img>
                 </div>
                 <div className="DetectButtonArea">
-                    <button className="DetectButton" onClick={detectClick}>Detect</button>
+                    <button className="DetectButton" onClick={detectClick}>Build</button>
                 </div>  
             </div>
                 <div className="DetectionResultBox" style={{ display: isDetectStarted ? 'block' : 'none' }}>
